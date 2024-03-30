@@ -41,7 +41,7 @@ export const EmegencyAlertSchema = z.object({
     address: z.string(),
   }),
   description: z.string().optional(),
-  supportServiceId: z.string().uuid(),
+  supportServiceId: z.string().uuid().optional(),
 });
 
 export const EmergencyReponseSchema = z.object({

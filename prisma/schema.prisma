@@ -41,23 +41,23 @@ model EmegencyAlert {
   images           Json
   location         Json
   description      String?            @db.Text
-  supportServiceId String
-  supportService   SupportService     @relation(fields: [supportServiceId], onDelete: Cascade, references: [id])
+  supportServiceId String?
+  supportService   SupportService?    @relation(fields: [supportServiceId], onDelete: SetNull, references: [id])
   createdAt        DateTime           @default(now())
   updatedAt        DateTime           @updatedAt
   responses        EmergencyReponse[]
 }
 
 model EmergencyReponse {
-  id          String        @id @default(uuid())
-  alertId     String
-  alert       EmegencyAlert @relation(fields: [alertId], onDelete: Cascade, references: [id])
-  images      Json
-  description String?       @db.Text
+  id            String        @id @default(uuid())
+  alertId       String
+  alert         EmegencyAlert @relation(fields: [alertId], onDelete: Cascade, references: [id])
+  images        Json
+  description   String?       @db.Text
   responderName String
-  complete      Boolean @default(false)
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  complete      Boolean       @default(false)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
 }
 
 enum Gender {
