@@ -1,0 +1,67 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String          @id @default(uuid())
+  name           String?
+  email          String          @unique
+  username       String          @unique
+  phoneNumber    String          @unique
+  gender         Gender          @default(UNKNOWN)
+  password       String
+  createdAt      DateTime        @default(now())
+  updatedAt      DateTime        @updatedAt
+  emegencyAlerts EmegencyAlert[]
+}
+
+model SupportService {
+  id          String          @id @default(uuid())
+  image       String
+  name        String          @unique
+  phoneNumber String
+  email       String
+  createdAt   DateTime        @default(now())
+  updatedAt   DateTime        @updatedAt
+  alerts      EmegencyAlert[]
+}
+
+model EmegencyAlert {
+  id               String             @id @default(uuid())
+  userId           String
+  user             User               @relation(fields: [userId], onDelete: Cascade, references: [id])
+  images           Json
+  location         Json
+  description      String?            @db.Text
+  supportServiceId String
+  supportService   SupportService     @relation(fields: [supportServiceId], onDelete: Cascade, references: [id])
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  responses        EmergencyReponse[]
+}
+
+model EmergencyReponse {
+  id          String        @id @default(uuid())
+  alertId     String
+  alert       EmegencyAlert @relation(fields: [alertId], onDelete: Cascade, references: [id])
+  images      Json
+  description String?       @db.Text
+  responderName String
+  complete      Boolean @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  UNKNOWN
+}
