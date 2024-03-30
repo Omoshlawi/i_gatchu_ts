@@ -48,7 +48,7 @@ export const EmergencyReponseSchema = z.object({
   images: z.array(z.string()).optional().default([]),
   description: z.string().optional(),
   responderName: z.string(),
-  complete: z.string(),
+  complete: z.boolean().optional(),
   alertId: z.string().uuid(),
 });
 

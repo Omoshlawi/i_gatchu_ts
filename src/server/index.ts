@@ -6,8 +6,9 @@ import { handleErrors } from "../middlewares";
 import logger from "../shared/logger";
 
 import { default as usersRouter } from "../features/routes/users";
-import {default as serviceRouter} from "../features/routes/services";
-import {default as alertRouter} from "../features/routes/alerts";
+import { default as serviceRouter } from "../features/routes/services";
+import { default as alertRouter } from "../features/routes/alerts";
+import { default as responseRouter } from "../features/routes/responses";
 
 /**
  * Handle database connection logic
@@ -50,6 +51,7 @@ export const configureExpressApp = async (app: Application) => {
   app.use("/users", usersRouter);
   app.use("/services", serviceRouter);
   app.use("/emergency-alerts", alertRouter);
+  app.use("/emergency-responses", responseRouter);
   //-------------------end routes-----------------------------
 
   //---------------- error handler -----------------------
