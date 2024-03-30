@@ -36,6 +36,7 @@ model SupportService {
 
 model EmegencyAlert {
   id               String             @id @default(uuid())
+  title            String
   userId           String
   user             User               @relation(fields: [userId], onDelete: Cascade, references: [id])
   images           Json

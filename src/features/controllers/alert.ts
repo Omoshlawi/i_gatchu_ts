@@ -11,7 +11,11 @@ export const getAlerts = async (
   next: NextFunction
 ) => {
   try {
-    return res.json({ results: await EmmergencyAlertModel.findMany() });
+    return res.json({
+      results: await EmmergencyAlertModel.findMany({
+        include: { user: true, supportService: true, responses: true },
+      }),
+    });
   } catch (error) {
     next(error);
   }
@@ -47,6 +51,7 @@ export const createAlert = async (
       });
     const service = await EmmergencyAlertModel.create({
       data: { ...validation.data, userId: (req as any).user.id },
+      include: { user: true },
     });
     return res.json(service);
   } catch (error) {
