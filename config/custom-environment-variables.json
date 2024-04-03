@@ -1,5 +1,8 @@
 {
   "port": "PORT",
   "jwt": "JWT_TOKEN",
-  "db": "DATABASE_URL."
+  "db": "DATABASE_URL",
+  "openstreat_api": "OPENSTREAT_API_KEY",
+  "mapquest_key": "MAPQUEST_CONSUMER_KEY",
+  "mapquest_secrete": "MAPQUEST_CONSUMER_SECRETE"
 }

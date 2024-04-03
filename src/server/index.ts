@@ -9,6 +9,7 @@ import { default as usersRouter } from "../features/routes/users";
 import { default as serviceRouter } from "../features/routes/services";
 import { default as alertRouter } from "../features/routes/alerts";
 import { default as responseRouter } from "../features/routes/responses";
+import { default as mapsRouter } from "../features/maps/routes";
 
 /**
  * Handle database connection logic
@@ -52,6 +53,8 @@ export const configureExpressApp = async (app: Application) => {
   app.use("/services", serviceRouter);
   app.use("/emergency-alerts", alertRouter);
   app.use("/emergency-responses", responseRouter);
+  app.use("/maps", mapsRouter);
+
   //-------------------end routes-----------------------------
 
   //---------------- error handler -----------------------
